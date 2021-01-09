@@ -1,11 +1,16 @@
-
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 
 const App = () => {
   return (
     <>
-      <h1>Search for Movies</h1>
+      <Header />
+      <main>
+        <h1>Search for Movies</h1>
+      </main>
+      <Footer />
     </>
   );
-}
+};
 
 export default App;
