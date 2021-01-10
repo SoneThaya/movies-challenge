@@ -6,6 +6,11 @@ import axios from "axios";
 const MoviePage = ({ match }) => {
   const [movie, setMovie] = useState({});
 
+  const [title, setTitle] = useState("");
+  const [year, setYear] = useState(0);
+  const [poster, setPoster] = useState("");
+  const [imdbID, setImdbID] = useState("");
+
   useEffect(() => {
     const fetchMovie = async () => {
       const { data } = await axios.get(
@@ -13,11 +18,25 @@ const MoviePage = ({ match }) => {
       );
 
       setMovie(data);
+      setTitle(movie.Title);
+      setYear(movie.Year);
+      setPoster(movie.Poster);
+      setImdbID(movie.imdbID);
+      //console.log("data", movie);
     };
 
     fetchMovie();
-  }, [match]);
- 
+  }, [match, movie.Poster, movie.Title, movie.Year, movie.imdbID]);
+
+  console.log("title", title);
+  console.log("year", year);
+  console.log("poster", poster);
+  console.log("imdbID", imdbID);
+
+  const nominateHandler = () => {
+    
+  }
+
   return (
     <>
       <Link className="btn btn-dark my-3" to="/">
@@ -47,7 +66,7 @@ const MoviePage = ({ match }) => {
           <Card>
             <ListGroup variant="flush">
               <ListGroup.Item>
-                <Button className="btn-block" type="button">
+                <Button className="btn-block" type="button" onClick={nominateHandler}>
                   Nominate
                 </Button>
               </ListGroup.Item>
