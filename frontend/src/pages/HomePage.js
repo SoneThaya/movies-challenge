@@ -1,31 +1,42 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 import Movie from "../components/Movie";
-import axios from "axios";
+import { listSearchedMovies } from "../state/actions/movieActions";
+import SearchBox from "../components/SearchBox";
 
 const HomePage = () => {
-  const [movies, setMovies] = useState([]);
+  const [moviesList, setMoviesList] = useState([]);
 
-  useEffect(() => {
-    const fetchMovies = async () => {
-      const { data } = await axios.get("/api/movies");
+  const dispatch = useDispatch();
 
-      setMovies(data);
-    };
+  const movieSearch = useSelector((state) => state.movieSearch);
+  const { loading, movies, success, error } = movieSearch;
 
-    fetchMovies()
-  }, []);
+  console.log(movies.Search);
+  setMoviesList(movies.Search);
+
+  useEffect(() => {}, [dispatch]);
 
   return (
     <>
       <h1>Movies</h1>
-      <Row>
-        {movies.map((movie) => (
-          <Col sm={12} md={6} lg={4} xl={3} key={movie.imdbID}>
-            <Movie movie={movie} />
-          </Col>
-        ))}
-      </Row>
+      <SearchBox />
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <Message>{error}</Message>
+      ) : (
+        <>
+          <Row>
+            {moviesList.map((movie) => (
+              <Col sm={12} md={6} lg={4} xl={3} key={movie.imdbID}>
+                <Movie movie={movie} />
+              </Col>
+            ))}
+          </Row>
+        </>
+      )}
     </>
   );
 };
