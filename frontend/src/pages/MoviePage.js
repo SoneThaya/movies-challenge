@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
-import moviesData from "../MoviesData";
+import axios from "axios";
 
 const MoviePage = ({ match }) => {
-  const movie = moviesData.find((m) => m._id === match.params.id);
+  const [movie, setMovie] = useState({});
 
+  useEffect(() => {
+    const fetchMovie = async () => {
+      const { data } = await axios.get(
+        `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_KEY}&i=${match.params.imdbID}`
+      );
+
+      setMovie(data);
+    };
+
+    fetchMovie();
+  }, [match]);
+ 
   return (
     <>
       <Link className="btn btn-dark my-3" to="/">

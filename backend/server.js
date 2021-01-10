@@ -11,8 +11,8 @@ app.get("/api/movies", (req, res) => {
   res.json(movies);
 });
 
-app.get("/api/movies/:id", (req, res) => {
-    const movie = movies.find(p => p._id === req.params.id);
+app.get("/api/movies/:imdbID", (req, res) => {
+    const movie = movies.find(p => p.imdbID === req.params.id);
 
     res.json(movie);
   });
