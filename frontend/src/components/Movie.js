@@ -16,7 +16,6 @@ const Movie = ({ movie }) => {
         </Link>
 
         <Card.Text as="div">Released: {movie.Year}</Card.Text>
-        <Card.Text as="div">Metascore: {movie.Metascore}</Card.Text>
       </Card.Body>
     </Card>
   );

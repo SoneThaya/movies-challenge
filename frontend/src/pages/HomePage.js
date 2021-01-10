@@ -4,6 +4,8 @@ import { Row, Col } from "react-bootstrap";
 import Movie from "../components/Movie";
 import { listSearchedMovies } from "../state/actions/movieActions";
 import SearchBox from "../components/SearchBox";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
 
 const HomePage = () => {
   const [moviesList, setMoviesList] = useState([]);
@@ -11,12 +13,16 @@ const HomePage = () => {
   const dispatch = useDispatch();
 
   const movieSearch = useSelector((state) => state.movieSearch);
-  const { loading, movies, success, error } = movieSearch;
+  const { loading, movies, error } = movieSearch;
+  const { Search } = movies;
 
-  console.log(movies.Search);
-  setMoviesList(movies.Search);
+  console.log(Search);
+  console.log(movies);
+  // setMoviesList(movies.Search);
 
-  useEffect(() => {}, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(listSearchedMovies())
+  // }, [dispatch]);
 
   return (
     <>
@@ -29,7 +35,7 @@ const HomePage = () => {
       ) : (
         <>
           <Row>
-            {moviesList.map((movie) => (
+            {movies.map((movie) => (
               <Col sm={12} md={6} lg={4} xl={3} key={movie.imdbID}>
                 <Movie movie={movie} />
               </Col>
