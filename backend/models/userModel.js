@@ -1,12 +1,16 @@
 import mongoose from "mongoose";
 
-const nominationSchema = mongoose.Schema({
-  Title: { type: String, required: true },
-  Year: { type: String, required: true },
-  Poster: { type: String, required: true },
-}, {
-    timestamps: true
-});
+const nominationSchema = mongoose.Schema(
+  {
+    Title: { type: String, required: true },
+    Year: { type: String, required: true },
+    Poster: { type: String, required: true },
+    imdbID: { type: String, required: true },
+  },
+  {
+    timestamps: true,
+  }
+);
 
 const userSchema = mongoose.Schema(
   {

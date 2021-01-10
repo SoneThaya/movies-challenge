@@ -2,7 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import colors from "colors";
 import connectDB from "./config/db.js";
-import movies from "./data/MoviesData.js";
+
+import movieRoutes from "./routes/movieRoutes.js";
 
 dotenv.config();
 
@@ -14,15 +15,7 @@ app.get("/", (req, res) => {
   res.send("API is running");
 });
 
-app.get("/api/movies", (req, res) => {
-  res.json(movies);
-});
-
-app.get("/api/movies/:imdbID", (req, res) => {
-  const movie = movies.find((p) => p.imdbID === req.params.id);
-
-  res.json(movie);
-});
+app.use("/api/movies", movieRoutes);
 
 const PORT = process.env.PORT || 5000;
 
