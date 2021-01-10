@@ -1,6 +1,5 @@
 const movies = [
   {
-    _id: "1",
     Title: "The Shawshank Redemption",
     Year: "1994",
     Rated: "R",
@@ -44,7 +43,6 @@ const movies = [
     Response: "True",
   },
   {
-    _id: "2",
     Title: "Tenet",
     Year: "2020",
     Rated: "PG-13",
@@ -87,7 +85,6 @@ const movies = [
     Response: "True",
   },
   {
-    _id: "3",
     Title: "The Avengers",
     Year: "2012",
     Rated: "PG-13",
