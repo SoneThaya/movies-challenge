@@ -1,7 +1,7 @@
 import React from "react";
-import { Row, Col, Image } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import moviesData from "../MoviesData";
-import MovieDetails from '../components/MovieDetails'
+import Movie from "../components/Movie";
 
 const HomePage = () => {
   return (
@@ -10,7 +10,7 @@ const HomePage = () => {
       <Row>
         {moviesData.map((movie) => (
           <Col sm={12} md={6} lg={4} xl={3}>
-            <MovieDetails movie={movie} />
+            <Movie movie={movie} />
           </Col>
         ))}
       </Row>

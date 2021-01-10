@@ -1,18 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
 
-const MovieDetails = ({ movie }) => {
+const Movie = ({ movie }) => {
   return (
     <Card className="my-3 p-3 rounded">
-      <a href={`/movie/${movie._id}`}>
+      <Link to={`/movie/${movie._id}`}>
         <Card.Img src={movie.Poster} variant="top" />
-      </a>
+      </Link>
       <Card.Body>
-        <a href={`/movie/${movie._id}`}>
+        <Link to={`/movie/${movie._id}`}>
           <Card.Title as="div">
             <strong>{movie.Title}</strong>
           </Card.Title>
-        </a>
+        </Link>
 
         <Card.Text as="div">Released: {movie.Year}</Card.Text>
         <Card.Text as="div">Metascore: {movie.Metascore}</Card.Text>
@@ -21,4 +22,4 @@ const MovieDetails = ({ movie }) => {
   );
 };
 
-export default MovieDetails;
+export default Movie;
