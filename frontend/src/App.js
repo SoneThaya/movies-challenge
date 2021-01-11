@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import MoviePage from "./pages/MoviePage";
 import NominatePage from "./pages/NominatePage";
 import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route exact path="/movie/:imdbID" component={MoviePage} />
           <Route exact path="/nominations/:id" component={NominatePage} />
           <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/register" component={RegisterPage} />
         </Container>
       </main>
       <Footer />

@@ -2,11 +2,15 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { movieSearchReducer } from "./state/reducers/movieReducers";
-import { userLoginReducer } from "./state/reducers/userReducers";
+import {
+  userLoginReducer,
+  userRegisterReducer,
+} from "./state/reducers/userReducers";
 
 const reducer = combineReducers({
   movieSearch: movieSearchReducer,
   userLogin: userLoginReducer,
+  userRegister: userRegisterReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
