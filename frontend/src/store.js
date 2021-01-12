@@ -15,11 +15,16 @@ const reducer = combineReducers({
   userNominations: userNominationsReducer,
 });
 
+const movieNominationsFromStorage = localStorage.getItem("movieNominations")
+  ? JSON.parse(localStorage.getItem("movieNominations"))
+  : [];
+
 const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
 
 const initialState = {
+  nominations: { movieNominations: movieNominationsFromStorage },
   userLogin: { userInfo: userInfoFromStorage },
 };
 

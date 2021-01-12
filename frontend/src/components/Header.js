@@ -25,7 +25,7 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
-              <LinkContainer to={`/nominations/${userInfo._id}`}>
+              <LinkContainer to="/nominations">
                 <Nav.Link>
                   <i className="fas fa-film"></i> My Nominations
                 </Nav.Link>

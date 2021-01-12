@@ -11,7 +11,9 @@ const NominatePage = () => {
   const dispatch = useDispatch();
 
   const userNominations = useSelector((state) => state.userNominations);
-  const { loading, nominations, error } = userNominations;
+    const { loading, nominations, error } = userNominations;
+    
+    console.log(nominations);
 
   useEffect(() => {
     dispatch(listUserNominations());

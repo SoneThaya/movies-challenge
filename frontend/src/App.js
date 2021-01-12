@@ -16,7 +16,7 @@ const App = () => {
         <Container>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/movie/:imdbID" component={MoviePage} />
-          <Route exact path="/nominations/:id" component={NominatePage} />
+          <Route exact path="/nominations" component={NominatePage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={RegisterPage} />
         </Container>

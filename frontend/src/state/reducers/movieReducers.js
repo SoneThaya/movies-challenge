@@ -11,6 +11,9 @@ import {
   USER_NOMINATIONS_REQUEST,
   USER_NOMINATIONS_SUCCESS,
   USER_NOMINATIONS_FAIL,
+  MOVIE_ADD_NOMINATION,
+  MOVIE_CLEAR_NOMINATION,
+  MOVIE_REMOVE_NOMINATION,
 } from "../constants/movieConstants";
 
 export const movieSearchReducer = (state = { movies: [] }, action) => {
@@ -84,6 +87,43 @@ export const userNominationReducer = (state = { nominations: [] }, action) => {
       return {
         loading: false,
         error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export const cartReducer = (state = { movieNominations: [] }, action) => {
+  switch (action.type) {
+    case MOVIE_ADD_NOMINATION:
+      const item = action.payload;
+
+      const existItem = state.movieNominations.find(
+        (x) => x.product === item.product
+      );
+
+      if (existItem) {
+        return {
+          ...state,
+          movieNominations: state.movieNominations.map((x) =>
+            x.product === existItem.product ? item : x
+          ),
+        };
+      } else {
+        return {
+          ...state,
+          movieNominations: [...state.movieNominations, item],
+        };
+      }
+    case MOVIE_REMOVE_NOMINATION:
+      return {
+        ...state,
+        movieNominations: state.movieNominations.filter((x) => x.product !== action.payload),
+      };
+    case MOVIE_CLEAR_NOMINATION:
+      return {
+        ...state,
+        cartItems: [],
       };
     default:
       return state;
