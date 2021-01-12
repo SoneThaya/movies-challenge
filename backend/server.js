@@ -4,6 +4,7 @@ import colors from "colors";
 import connectDB from "./config/db.js";
 
 import movieRoutes from "./routes/movieRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/movies", movieRoutes);
+app.use("/api/users", userRoutes);
 
 const PORT = process.env.PORT || 5000;
 
