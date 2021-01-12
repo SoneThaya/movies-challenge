@@ -3,6 +3,9 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
+  USER_NOMINATIONS_FAIL,
+  USER_NOMINATIONS_REQUEST,
+  USER_NOMINATIONS_SUCCESS,
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
@@ -37,3 +40,19 @@ export const userRegisterReducer = (state = {}, action) => {
       return state;
   }
 };
+
+export const userNominationsReducer = (state = { nominations: []}, action) => {
+  switch (action.type) {
+    case USER_NOMINATIONS_REQUEST:
+      return { loading: true };
+    case USER_NOMINATIONS_SUCCESS:
+      return { loading: false, nominations: action.payload };
+    case USER_NOMINATIONS_FAIL:
+      return { loading: false, error: action.payload };
+    case USER_LOGOUT:
+      return {};
+    default:
+      return state;
+  }
+};
+

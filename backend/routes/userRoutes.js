@@ -9,6 +9,7 @@ import {
   deleteUser,
   getUserById,
   updateUser,
+  getUserNominations,
 } from "../controllers/userController.js";
 import { protect, admin } from "../middleware/authMiddleware.js";
 
@@ -18,6 +19,9 @@ router
   .route("/profile")
   .get(protect, getUserProfile)
   .put(protect, updateUserProfile);
+// need a post nominations route
+router.route("/nominations").get(protect, getUserNominations);
+
 router
   .route("/:id")
   .delete(protect, admin, deleteUser)

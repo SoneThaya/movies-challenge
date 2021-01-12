@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Container } from "react-bootstrap";
 import Movie from "../components/Movie";
 import { listSearchedMovies } from "../state/actions/movieActions";
 import SearchBox from "../components/SearchBox";
@@ -14,10 +14,7 @@ const HomePage = () => {
 
   const movieSearch = useSelector((state) => state.movieSearch);
   const { loading, movies, error } = movieSearch;
-  const { Search } = movies;
-
-  console.log(Search);
-  console.log(movies);
+  
   // setMoviesList(movies.Search);
 
   // useEffect(() => {
@@ -26,7 +23,7 @@ const HomePage = () => {
 
   return (
     <>
-      <h1>Movies</h1>
+      <h1>Select Movies to Nominate</h1>
       <SearchBox />
       {loading ? (
         <Loader />

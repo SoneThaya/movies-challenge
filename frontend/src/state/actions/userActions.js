@@ -3,6 +3,10 @@ import {
   USER_LOGIN_FAIL,
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
+  USER_LOGOUT,
+  USER_NOMINATIONS_FAIL,
+  USER_NOMINATIONS_REQUEST,
+  USER_NOMINATIONS_SUCCESS,
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
@@ -38,6 +42,14 @@ export const login = (email, password) => async (dispatch) => {
           : error.message,
     });
   }
+};
+
+export const logout = () => (dispatch) => {
+  localStorage.removeItem("userInfo");
+
+  dispatch({ type: USER_LOGOUT });
+
+  document.location.href = "/login";
 };
 
 export const register = (name, email, password) => async (dispatch) => {
@@ -76,6 +88,43 @@ export const register = (name, email, password) => async (dispatch) => {
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message,
+    });
+  }
+};
+
+export const listUserNominations = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_NOMINATIONS_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/users/nominations`, config);
+
+    dispatch({
+      type: USER_NOMINATIONS_SUCCESS,
+      payload: data.nominations,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    if (message === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: USER_NOMINATIONS_FAIL,
+      payload: message,
     });
   }
 };

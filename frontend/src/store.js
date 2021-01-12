@@ -5,12 +5,14 @@ import { movieSearchReducer } from "./state/reducers/movieReducers";
 import {
   userLoginReducer,
   userRegisterReducer,
+  userNominationsReducer,
 } from "./state/reducers/userReducers";
 
 const reducer = combineReducers({
   movieSearch: movieSearchReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
+  userNominations: userNominationsReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
