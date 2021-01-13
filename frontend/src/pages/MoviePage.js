@@ -34,8 +34,11 @@ const MoviePage = ({ match }) => {
   console.log("imdbID", imdbID);
 
   const nominateHandler = () => {
-    
-  }
+    localStorage.setItem(
+      "nominations",
+      JSON.stringify({ poster, title, year, imdbID })
+    );
+  };
 
   return (
     <>
@@ -66,7 +69,11 @@ const MoviePage = ({ match }) => {
           <Card>
             <ListGroup variant="flush">
               <ListGroup.Item>
-                <Button className="btn-block" type="button" onClick={nominateHandler}>
+                <Button
+                  className="btn-block"
+                  type="button"
+                  onClick={nominateHandler}
+                >
                   Nominate
                 </Button>
               </ListGroup.Item>
