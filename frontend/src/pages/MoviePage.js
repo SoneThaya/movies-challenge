@@ -3,8 +3,16 @@ import { Link } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
 import axios from "axios";
 
+const LOCAL_STORAGE_KEY = "nominations-list";
+
 const MoviePage = ({ match }) => {
-  const [movie, setMovie] = useState({});
+  const [movie, setMovie] = useState({
+    title: "",
+    year: "",
+    poster: "",
+    imdbID: "",
+  });
+  const [nominate, setNominate] = useState([])
 
   const [title, setTitle] = useState("");
   const [year, setYear] = useState(0);
@@ -33,11 +41,16 @@ const MoviePage = ({ match }) => {
   console.log("poster", poster);
   console.log("imdbID", imdbID);
 
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(nominate))
+  }, [nominate])
+
   const nominateHandler = () => {
-    localStorage.setItem(
-      "nominations",
-      JSON.stringify({ poster, title, year, imdbID })
-    );
+    // localStorage.setItem(
+    //   "nominations",
+    //   JSON.stringify({ poster, title, year, imdbID })
+    // );
+    setMovie([movie, ...nominate])
   };
 
   return (

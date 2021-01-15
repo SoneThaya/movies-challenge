@@ -48,7 +48,7 @@ export const addToNominations = (id) => async (dispatch, getState) => {
 
   localStorage.setItem(
     "movieNominations",
-    JSON.stringify(getState().movie.movieNominations)
+    JSON.stringify(getState().nominations.movieNominations)
   );
 };
 
