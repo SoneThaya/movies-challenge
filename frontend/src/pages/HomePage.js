@@ -14,7 +14,7 @@ const HomePage = () => {
 
   const movieSearch = useSelector((state) => state.movieSearch);
   const { loading, movies, error } = movieSearch;
-  
+
   // setMoviesList(movies.Search);
 
   // useEffect(() => {

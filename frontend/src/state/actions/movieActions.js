@@ -58,20 +58,20 @@ export const movieAddNomination = (movie) => async (dispatch, getState) => {
   }
 };
 
-export const addToNominations = (id) => async (dispatch, getState) => {
-  //const { data } = await axios.get(`/api/products/${id}`)
+// export const addToNominations = (id) => async (dispatch, getState) => {
+//   //const { data } = await axios.get(`/api/products/${id}`)
 
-  const { data } = await axios.get(
-    `${omdbBaseUrl}${process.env.REACT_APP_OMDB_KEY}&i=${id}`
-  );
+//   const { data } = await axios.get(
+//     `${omdbBaseUrl}${process.env.REACT_APP_OMDB_KEY}&i=${id}`
+//   );
 
-  dispatch({
-    type: MOVIE_ADD_NOMINATION,
-    payload: data,
-  });
+//   dispatch({
+//     type: MOVIE_ADD_NOMINATION,
+//     payload: data,
+//   });
 
-  localStorage.setItem("movieNominations", JSON.stringify(data));
-};
+//   localStorage.setItem("movieNominations", JSON.stringify(data));
+// };
 
 export const removeFromNominations = (id) => (dispatch, getState) => {
   dispatch({

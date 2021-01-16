@@ -1,27 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
 import axios from "axios";
 import { movieAddNomination } from "../state/actions/movieActions";
 
-const LOCAL_STORAGE_KEY = "nominations-list";
+const LOCAL_STORAGE_KEY = "nomis";
 
 const MoviePage = ({ match }) => {
   const dispatch = useDispatch();
 
-  const [movie, setMovie] = useState({
-    title: "",
-    year: "",
-    poster: "",
-    imdbID: "",
-  });
-  const [nominate, setNominate] = useState([]);
+  const [movie, setMovie] = useState({});
 
-  const [title, setTitle] = useState("");
-  const [year, setYear] = useState(0);
-  const [poster, setPoster] = useState("");
-  const [imdbID, setImdbID] = useState("");
+  const [temp, setTemp] = useState([]);
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -30,27 +21,21 @@ const MoviePage = ({ match }) => {
       );
 
       setMovie(data);
-      setTitle(movie.Title);
-      setYear(movie.Year);
-      setPoster(movie.Poster);
-      setImdbID(movie.imdbID);
     };
 
     fetchMovie();
-  }, [match, movie.Poster, movie.Title, movie.Year, movie.imdbID]);
-
-  // console.log("title", title);
-  // console.log("year", year);
-  // console.log("poster", poster);
-  // console.log("imdbID", imdbID);
+  }, [match, movie]);
 
   useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(nominate));
-  }, [nominate]);
+    const storageNominations = JSON.parse(
+      localStorage.getItem(LOCAL_STORAGE_KEY)
+    );
+    if (storageNominations) {
+      setTemp(storageNominations);
+    }
+  }, [temp]);
 
   const nominateHandler = () => {
-    //localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(movie));
-    //setMovie([movie, ...nominate])
     dispatch(movieAddNomination(movie));
   };
 
@@ -87,6 +72,10 @@ const MoviePage = ({ match }) => {
                   className="btn-block"
                   type="button"
                   onClick={nominateHandler}
+                  disabled={
+                    temp.length > 4 ||
+                    temp.some((nom) => nom.imdbID === movie.imdbID)
+                  }
                 >
                   Nominate
                 </Button>
