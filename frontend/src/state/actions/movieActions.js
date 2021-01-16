@@ -17,7 +17,6 @@ export const listSearchedMovies = (searchTerm) => async (dispatch) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
-        "Content-Security-Policy": "upgrade-insecure-requests",
       },
     };
 
