@@ -17,22 +17,20 @@ const NominatePage = () => {
   // const userNominations = useSelector((state) => state.userNominations);
   // const { loading, nominations, error } = userNominations;
 
-  // let storage = localStorage.getItem("nominations");
+  // let storage = localStorage.getItem("noms");
   // return storage ? JSON.parse(storage) : []
 
-  useEffect(() => {
-    const storageNominations = JSON.parse(
-      localStorage.getItem(LOCAL_STORAGE_KEY)
-    );
-    if (storageNominations) {
-      setChosen(storageNominations);
-    }
-  }, []);
+  // console.log(storage);
 
   useEffect(() => {
-    //setChosen(storage);
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(chosen));
-  }, [chosen]);
+    const storageNominations = JSON.parse(localStorage.getItem("nomis"));
+    setChosen(storageNominations);
+  }, []);
+
+  // useEffect(() => {
+  //   //setChosen(storage);
+  //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(chosen));
+  // }, [chosen]);
 
   console.log("chosen", chosen);
 

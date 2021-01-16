@@ -32,7 +32,7 @@ export const listSearchedMovies = (searchTerm) => async (dispatch) => {
   }
 };
 
-export const movieAddNomination = (movie) => async (dispatch) => {
+export const movieAddNomination = (movie) => async (dispatch, getState) => {
   try {
     dispatch({ type: MOVIE_ADD_NOMINATION_REQUEST });
 
@@ -44,10 +44,9 @@ export const movieAddNomination = (movie) => async (dispatch) => {
 
     dispatch({ type: MOVIE_ADD_NOMINATION_SUCCESS, payload: data });
 
-    // const tempStorage = localStorage.getItem("nomis", JSON.stringify(data));
+    //const tempStorage = localStorage.getItem("nomis", JSON.stringify(data));
 
-    // localStorage.setItem("nomis", JSON.stringify([...tempStorage, data]));
-
+    localStorage.setItem("nomis", JSON.stringify(getState().movieNoms.noms));
   } catch (error) {
     dispatch({
       type: MOVIE_ADD_NOMINATION_FAIL,

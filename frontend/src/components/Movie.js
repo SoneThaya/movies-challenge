@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
+import { movieAddNomination } from "../state/actions/movieActions";
 
-const LOCAL_STORAGE_KEY = "nominations-list";
+const LOCAL_STORAGE_KEY = "nomis";
 
 const Movie = ({ movie }) => {
   const [title, setTitle] = useState("");
@@ -19,10 +21,12 @@ const Movie = ({ movie }) => {
     imdbID: "",
   });
 
-  useEffect(() => {
-    //setChosen(storage);
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(temp));
-  }, [temp]);
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   //setChosen(storage);
+  //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(temp));
+  // }, [temp]);
 
   // console.log(movie);
 
@@ -46,15 +50,19 @@ const Movie = ({ movie }) => {
     if (storageNominations) {
       setTemp(storageNominations);
     }
-  }, []);
+  }, [temp]);
+
+  console.log(temp);
 
   const nominateHandler = (e) => {
     e.preventDefault();
-    console.log("movie", movie);
-    console.log("temp", temp);
-    setTemp([...temp, movie]);
+    // console.log("movie", movie);
+    // console.log("temp", temp);
+    // setTemp([...temp, movie]);
 
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(temp));
+    // localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(temp));
+
+    dispatch(movieAddNomination(movie));
   };
 
   return (
@@ -71,7 +79,12 @@ const Movie = ({ movie }) => {
 
         <Card.Text as="div">Released: {movie.Year}</Card.Text>
       </Card.Body>
-      <Button className="btn-block" type="button" onClick={nominateHandler}>
+      <Button
+        className="btn-block"
+        type="button"
+        onClick={nominateHandler}
+        disabled={temp.length > 4 || temp.some((nom) => nom.imdbID === movie.imdbID)}
+      >
         Nominate
       </Button>
     </Card>
