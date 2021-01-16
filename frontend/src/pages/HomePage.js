@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 import Movie from "../components/Movie";
 import SearchBox from "../components/SearchBox";
@@ -7,7 +7,6 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 
 const HomePage = () => {
-  const dispatch = useDispatch();
 
   const movieSearch = useSelector((state) => state.movieSearch);
   const { loading, movies, error } = movieSearch;

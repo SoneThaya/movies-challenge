@@ -14,8 +14,15 @@ export const listSearchedMovies = (searchTerm) => async (dispatch) => {
   try {
     dispatch({ type: MOVIE_SEARCH_REQUEST });
 
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
     const { data } = await axios.get(
-      `${omdbBaseUrl}${process.env.REACT_APP_OMDB_KEY}&s=${searchTerm}`
+      `${omdbBaseUrl}${process.env.REACT_APP_OMDB_KEY}&s=${searchTerm}`,
+      config
     );
 
     dispatch({ type: MOVIE_SEARCH_SUCCESS, payload: data.Search });
