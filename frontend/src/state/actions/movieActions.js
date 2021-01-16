@@ -8,7 +8,7 @@ import {
   MOVIE_ADD_NOMINATION_FAIL,
 } from "../constants/movieConstants";
 
-const omdbBaseUrl = "http://www.omdbapi.com/?apikey=";
+const omdbBaseUrl = "https://www.omdbapi.com/?apikey=";
 
 export const listSearchedMovies = (searchTerm) => async (dispatch) => {
   try {
