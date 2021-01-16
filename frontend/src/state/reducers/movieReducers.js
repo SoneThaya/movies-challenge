@@ -29,17 +29,18 @@ export const movieSearchReducer = (state = { movies: [] }, action) => {
   }
 };
 
-export const movieAddNominationReducer = (state = {}, action) => {
+export const movieAddNominationReducer = (state = { noms: [] }, action) => {
   switch (action.type) {
     case MOVIE_ADD_NOMINATION_REQUEST:
       return {
+        ...state,
         loading: true,
       };
     case MOVIE_ADD_NOMINATION_SUCCESS:
       return {
         loading: false,
         success: true,
-        nominations: action.payload,
+        noms: [...state.noms, action.payload],
       };
     case MOVIE_ADD_NOMINATION_FAIL:
       return {
@@ -93,39 +94,43 @@ export const userNominationReducer = (state = { nominations: [] }, action) => {
   }
 };
 
-export const cartReducer = (state = { movieNominations: [] }, action) => {
-  switch (action.type) {
-    case MOVIE_ADD_NOMINATION:
-      const item = action.payload;
+// export const movieAddNominationReducer = (state = { movieNominations: [] }, action) => {
+//   switch (action.type) {
+//     case MOVIE_ADD_NOMINATION:
+//       return {
+//         ...state,
+//         movieNominations: [...state.movieNominations, payload.]
+//       }
+//     const item = action.payload;
 
-      const existItem = state.movieNominations.find(
-        (x) => x.product === item.product
-      );
+//     const existItem = state.movieNominations.find(
+//       (x) => x.product === item.product
+//     );
 
-      if (existItem) {
-        return {
-          ...state,
-          movieNominations: state.movieNominations.map((x) =>
-            x.product === existItem.product ? item : x
-          ),
-        };
-      } else {
-        return {
-          ...state,
-          movieNominations: [...state.movieNominations, item],
-        };
-      }
-    case MOVIE_REMOVE_NOMINATION:
-      return {
-        ...state,
-        movieNominations: state.movieNominations.filter((x) => x.product !== action.payload),
-      };
-    case MOVIE_CLEAR_NOMINATION:
-      return {
-        ...state,
-        cartItems: [],
-      };
-    default:
-      return state;
-  }
-};
+//     if (existItem) {
+//       return {
+//         ...state,
+//         movieNominations: state.movieNominations.map((x) =>
+//           x.product === existItem.product ? item : x
+//         ),
+//       };
+//     } else {
+//       return {
+//         ...state,
+//         movieNominations: [...state.movieNominations, item],
+//       };
+//     }
+//   case MOVIE_REMOVE_NOMINATION:
+//     return {
+//       ...state,
+//       movieNominations: state.movieNominations.filter((x) => x.product !== action.payload),
+//     };
+//   case MOVIE_CLEAR_NOMINATION:
+//     return {
+//       ...state,
+//       cartItems: [],
+//     };
+//     default:
+//       return state;
+//   }
+// };

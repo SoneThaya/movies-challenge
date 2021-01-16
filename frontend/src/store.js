@@ -1,7 +1,10 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { movieSearchReducer } from "./state/reducers/movieReducers";
+import {
+  movieSearchReducer,
+  movieAddNominationReducer,
+} from "./state/reducers/movieReducers";
 import {
   userLoginReducer,
   userRegisterReducer,
@@ -10,13 +13,14 @@ import {
 
 const reducer = combineReducers({
   movieSearch: movieSearchReducer,
+  movieNoms: movieAddNominationReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userNominations: userNominationsReducer,
 });
 
-const movieNominationsFromStorage = localStorage.getItem("movieNominations")
-  ? JSON.parse(localStorage.getItem("movieNominations"))
+const movieNominationsFromStorage = localStorage.getItem("nomis")
+  ? JSON.parse(localStorage.getItem("nomis"))
   : [];
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

@@ -3,6 +3,9 @@ import {
   MOVIE_SEARCH_REQUEST,
   MOVIE_SEARCH_SUCCESS,
   MOVIE_SEARCH_FAIL,
+  MOVIE_ADD_NOMINATION_REQUEST,
+  MOVIE_ADD_NOMINATION_SUCCESS,
+  MOVIE_ADD_NOMINATION_FAIL,
   MOVIE_ADD_NOMINATION,
   MOVIE_REMOVE_NOMINATION,
 } from "../constants/movieConstants";
@@ -29,6 +32,33 @@ export const listSearchedMovies = (searchTerm) => async (dispatch) => {
   }
 };
 
+export const movieAddNomination = (movie) => async (dispatch) => {
+  try {
+    dispatch({ type: MOVIE_ADD_NOMINATION_REQUEST });
+
+    const { data } = await axios.get(
+      `${omdbBaseUrl}${process.env.REACT_APP_OMDB_KEY}&i=${movie.imdbID}`
+    );
+
+    console.log("action", data);
+
+    dispatch({ type: MOVIE_ADD_NOMINATION_SUCCESS, payload: data });
+
+    // const tempStorage = localStorage.getItem("nomis", JSON.stringify(data));
+
+    // localStorage.setItem("nomis", JSON.stringify([...tempStorage, data]));
+
+  } catch (error) {
+    dispatch({
+      type: MOVIE_ADD_NOMINATION_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
 export const addToNominations = (id) => async (dispatch, getState) => {
   //const { data } = await axios.get(`/api/products/${id}`)
 
@@ -38,18 +68,10 @@ export const addToNominations = (id) => async (dispatch, getState) => {
 
   dispatch({
     type: MOVIE_ADD_NOMINATION,
-    payload: {
-      Title: data.Title,
-      Year: data.Year,
-      imdbID: data.imdbID,
-      Poster: data.Poster,
-    },
+    payload: data,
   });
 
-  localStorage.setItem(
-    "movieNominations",
-    JSON.stringify(getState().nominations.movieNominations)
-  );
+  localStorage.setItem("movieNominations", JSON.stringify(data));
 };
 
 export const removeFromNominations = (id) => (dispatch, getState) => {
@@ -58,5 +80,5 @@ export const removeFromNominations = (id) => (dispatch, getState) => {
     payload: id,
   });
 
-  localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+  localStorage.removeItem(id);
 };

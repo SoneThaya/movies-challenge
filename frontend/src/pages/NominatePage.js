@@ -41,7 +41,7 @@ const NominatePage = () => {
     //   "nominations",
     //   JSON.stringify({ poster, title, year, imdbID })
     // );
-    setChosen(chosen.filter((choice) => choice.imdbID !== imdbID));
+    // setChosen(chosen.filter((choice) => choice.imdbID !== imdbID));
   };
 
   return (

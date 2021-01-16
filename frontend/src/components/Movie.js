@@ -16,23 +16,28 @@ const Movie = ({ movie }) => {
     title: "",
     year: "",
     poster: "",
-    imdbID: ""
-  })
-
-  console.log(movie);
+    imdbID: "",
+  });
 
   useEffect(() => {
-    setTitle(movie.Title);
-    setYear(movie.Year);
-    setPoster(movie.Poster);
-    setImdbID(movie.imdbID);
-    setNoms({...temp, title, year, poster, imdbID})
-  }, [movie.Poster, movie.Title, movie.Year, movie.imdbID]);
+    //setChosen(storage);
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(temp));
+  }, [temp]);
 
-  console.log("title", title);
-  console.log("year", year);
-  console.log("poster", poster);
-  console.log("imdbID", imdbID);
+  // console.log(movie);
+
+  // useEffect(() => {
+  //   setTitle(movie.Title);
+  //   setYear(movie.Year);
+  //   setPoster(movie.Poster);
+  //   setImdbID(movie.imdbID);
+  //   setNoms({ ...temp, title, year, poster, imdbID });
+  // }, [movie.Poster, movie.Title, movie.Year, movie.imdbID]);
+
+  // console.log("title", title);
+  // console.log("year", year);
+  // console.log("poster", poster);
+  // console.log("imdbID", imdbID);
 
   useEffect(() => {
     const storageNominations = JSON.parse(
@@ -43,18 +48,13 @@ const Movie = ({ movie }) => {
     }
   }, []);
 
-  useEffect(() => {
-    //setChosen(storage);
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(temp));
-  }, [temp]);
-
   const nominateHandler = (e) => {
     e.preventDefault();
-    localStorage.setItem(
-      LOCAL_STORAGE_KEY,
-      JSON.stringify({ poster, title, year, imdbID })
-    );
+    console.log("movie", movie);
+    console.log("temp", temp);
     setTemp([...temp, movie]);
+
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(temp));
   };
 
   return (

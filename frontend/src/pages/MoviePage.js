@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
 import axios from "axios";
+import { movieAddNomination } from "../state/actions/movieActions";
 
 const LOCAL_STORAGE_KEY = "nominations-list";
 
 const MoviePage = ({ match }) => {
+  const dispatch = useDispatch();
+
   const [movie, setMovie] = useState({
     title: "",
     year: "",
     poster: "",
     imdbID: "",
   });
-  const [nominate, setNominate] = useState([])
+  const [nominate, setNominate] = useState([]);
 
   const [title, setTitle] = useState("");
   const [year, setYear] = useState(0);
@@ -30,27 +34,24 @@ const MoviePage = ({ match }) => {
       setYear(movie.Year);
       setPoster(movie.Poster);
       setImdbID(movie.imdbID);
-      //console.log("data", movie);
     };
 
     fetchMovie();
   }, [match, movie.Poster, movie.Title, movie.Year, movie.imdbID]);
 
-  console.log("title", title);
-  console.log("year", year);
-  console.log("poster", poster);
-  console.log("imdbID", imdbID);
+  // console.log("title", title);
+  // console.log("year", year);
+  // console.log("poster", poster);
+  // console.log("imdbID", imdbID);
 
   useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(nominate))
-  }, [nominate])
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(nominate));
+  }, [nominate]);
 
   const nominateHandler = () => {
-    // localStorage.setItem(
-    //   "nominations",
-    //   JSON.stringify({ poster, title, year, imdbID })
-    // );
-    setMovie([movie, ...nominate])
+    //localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(movie));
+    //setMovie([movie, ...nominate])
+    dispatch(movieAddNomination(movie));
   };
 
   return (

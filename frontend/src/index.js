@@ -6,6 +6,11 @@ import "./bootstrap.min.css";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { loadState, saveState } from "./localStorage"
+
+store.subscribe(() => {
+  saveState(store.getState())
+})
 
 ReactDOM.render(
   <Provider store={store}>
