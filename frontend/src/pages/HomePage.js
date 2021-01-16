@@ -1,25 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import Movie from "../components/Movie";
-import { listSearchedMovies } from "../state/actions/movieActions";
 import SearchBox from "../components/SearchBox";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 
 const HomePage = () => {
-  const [moviesList, setMoviesList] = useState([]);
-
   const dispatch = useDispatch();
 
   const movieSearch = useSelector((state) => state.movieSearch);
   const { loading, movies, error } = movieSearch;
-
-  // setMoviesList(movies.Search);
-
-  // useEffect(() => {
-  //   dispatch(listSearchedMovies())
-  // }, [dispatch]);
 
   return (
     <>

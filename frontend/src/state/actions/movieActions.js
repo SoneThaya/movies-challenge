@@ -6,8 +6,6 @@ import {
   MOVIE_ADD_NOMINATION_REQUEST,
   MOVIE_ADD_NOMINATION_SUCCESS,
   MOVIE_ADD_NOMINATION_FAIL,
-  MOVIE_ADD_NOMINATION,
-  MOVIE_REMOVE_NOMINATION,
 } from "../constants/movieConstants";
 
 const omdbBaseUrl = "http://www.omdbapi.com/?apikey=";
@@ -44,8 +42,6 @@ export const movieAddNomination = (movie) => async (dispatch, getState) => {
 
     dispatch({ type: MOVIE_ADD_NOMINATION_SUCCESS, payload: data });
 
-    //const tempStorage = localStorage.getItem("nomis", JSON.stringify(data));
-
     localStorage.setItem("nomis", JSON.stringify(getState().movieNoms.noms));
   } catch (error) {
     dispatch({
@@ -56,28 +52,4 @@ export const movieAddNomination = (movie) => async (dispatch, getState) => {
           : error.message,
     });
   }
-};
-
-// export const addToNominations = (id) => async (dispatch, getState) => {
-//   //const { data } = await axios.get(`/api/products/${id}`)
-
-//   const { data } = await axios.get(
-//     `${omdbBaseUrl}${process.env.REACT_APP_OMDB_KEY}&i=${id}`
-//   );
-
-//   dispatch({
-//     type: MOVIE_ADD_NOMINATION,
-//     payload: data,
-//   });
-
-//   localStorage.setItem("movieNominations", JSON.stringify(data));
-// };
-
-export const removeFromNominations = (id) => (dispatch, getState) => {
-  dispatch({
-    type: MOVIE_REMOVE_NOMINATION,
-    payload: id,
-  });
-
-  localStorage.removeItem(id);
 };
