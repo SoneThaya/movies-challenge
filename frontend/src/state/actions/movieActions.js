@@ -45,8 +45,6 @@ export const movieAddNomination = (movie) => async (dispatch, getState) => {
       `${omdbBaseUrl}${process.env.REACT_APP_OMDB_KEY}&i=${movie.imdbID}`
     );
 
-    console.log("action", data);
-
     dispatch({ type: MOVIE_ADD_NOMINATION_SUCCESS, payload: data });
 
     localStorage.setItem("nomis", JSON.stringify(getState().movieNoms.noms));

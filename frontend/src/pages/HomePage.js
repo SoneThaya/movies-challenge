@@ -7,13 +7,12 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 
 const HomePage = () => {
-
   const movieSearch = useSelector((state) => state.movieSearch);
   const { loading, movies, error } = movieSearch;
 
   return (
     <>
-      <h1>Select Movies to Nominate</h1>
+      <h1>Search for Movies to Nominate</h1>
       <SearchBox />
       {loading ? (
         <Loader />
