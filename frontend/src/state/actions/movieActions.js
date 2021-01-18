@@ -41,8 +41,15 @@ export const movieAddNomination = (movie) => async (dispatch, getState) => {
   try {
     dispatch({ type: MOVIE_ADD_NOMINATION_REQUEST });
 
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
     const { data } = await axios.get(
-      `${omdbBaseUrl}${process.env.REACT_APP_OMDB_KEY}&i=${movie.imdbID}`
+      `${omdbBaseUrl}${process.env.REACT_APP_OMDB_KEY}&i=${movie.imdbID}`,
+      config
     );
 
     dispatch({ type: MOVIE_ADD_NOMINATION_SUCCESS, payload: data });
