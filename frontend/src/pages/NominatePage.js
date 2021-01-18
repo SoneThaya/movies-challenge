@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Row, Card, Button } from "react-bootstrap";
-// import Movie from "../components/Movie";
-// import Loader from "../components/Loader";
-// import Message from "../components/Message";
-// import { listUserNominations } from "../state/actions/userActions.js";
-// import { removeFromNominations } from "../state/actions/movieActions.js";
 
 const NominatePage = () => {
   const [chosen, setChosen] = useState([]);

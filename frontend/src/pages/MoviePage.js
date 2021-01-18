@@ -18,7 +18,7 @@ const MoviePage = ({ match }) => {
   useEffect(() => {
     const fetchMovie = async () => {
       const { data } = await axios.get(
-        `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_KEY}&i=${match.params.imdbID}`
+        `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_KEY}&i=${match.params.imdbID}`
       );
 
       setMovie(data);
