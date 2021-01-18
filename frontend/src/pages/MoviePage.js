@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
 import axios from "axios";
 import { movieAddNomination } from "../state/actions/movieActions";
+import Message from "../components/Message";
 
 const LOCAL_STORAGE_KEY = "nomis";
 
@@ -44,6 +45,7 @@ const MoviePage = ({ match }) => {
       <Link className="btn btn-dark my-3" to="/">
         Go Back
       </Link>
+      {temp.length > 4 && <Message>You have nominated 5 movies!</Message>}
       <Row>
         <Col md={6}>
           <Image src={movie.Poster} alt={movie.Title} fluid />
